@@ -13,7 +13,7 @@ app.use(cors());
 app.use("/public", express.static(process.cwd() + "/public"));
 
 app.get("/", function (req, res) {
-  res.sendFile(process.cwd() + "/views/index.html");
+  res.sendFile(process.cwd() + "/public/views/index.html");
 });
 
 // body-parser setup
@@ -30,7 +30,8 @@ const storage = multer.diskStorage({
     cb(null, file.originalname);
   },
 });
-export const upload = multer({ storage: storage });
+const upload = multer({ storage: multer.memoryStorage() });
+// export const upload = multer({ storage: storage });
 console.log("Multer setup successful..");
 
 // Connect to MongoDB
@@ -104,12 +105,12 @@ const createFile = async (req, res) => {
   }
 };
 
-app.post("/api/fileanalyse", upload.single("upfile"), createFile);
+app.post("/fileanalyse", upload.single("upfile"), createFile);
 
 const port = process.env.PORT || 3000;
-app.listen(port, function () {
-  console.log("Your app is listening on port " + port);
-});
+// app.listen(port, function () {
+//   console.log("Your app is listening on port " + port);
+// });
 
 // Export for Vercel
 export default serverless(app);
