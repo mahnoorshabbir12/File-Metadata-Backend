@@ -117,7 +117,7 @@ const createFile = async (req, res) => {
   }
 };
 
-app.post("lapi/fileanalyse", upload.single("upfile"), createFile);
+app.post("/api/fileanalyse", upload.single("upfile"), createFile);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, function () {
