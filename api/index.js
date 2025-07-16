@@ -1,4 +1,4 @@
-import serverless from "serverless-http"; // <-- Required for Vercel
+// import serverless from "serverless-http"; // <-- Required for Vercel
 import express from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
@@ -125,4 +125,4 @@ app.listen(PORT, function () {
 });
 
 // Export for Vercel
-export default serverless(app);
+// export default serverless(app);
