@@ -22,15 +22,27 @@ app.use(bodyParser.json());
 
 // multer setup
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "./public/temp");
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  },
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, "./public/temp");
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, file.originalname);
+//   },
+// });
+
+const isLocal = process.env.NODE_ENV !== "production";
+
+const upload = multer({
+  storage: isLocal
+    ? multer.diskStorage({
+        destination: (req, file, cb) => cb(null, "./public/temp"),
+        filename: (req, file, cb) => cb(null, file.originalname),
+      })
+    : multer.memoryStorage(),
 });
-const upload = multer({ storage: multer.memoryStorage() });
+
+// const upload = multer({ storage: multer.memoryStorage() });
 // export const upload = multer({ storage: storage });
 console.log("Multer setup successful..");
 
