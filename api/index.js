@@ -119,9 +119,9 @@ const createFile = async (req, res) => {
 
 app.post("/fileanalyse", upload.single("upfile"), createFile);
 
-const port = process.env.PORT || 3000;
-app.listen(port, function () {
-  console.log("Your app is listening on port " + port);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, function () {
+  console.log("Your app is listening on port " + PORT);
 });
 
 // Export for Vercel
